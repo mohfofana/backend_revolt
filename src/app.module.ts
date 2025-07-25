@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TicketsModule } from './modules/tickets/tickets.module';
+import { StatsModule } from './modules/stats/stats.module';
+import { UsersModule } from './modules/users/users.module';
+import { CommentsModule } from './modules/comments/comments.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { TicketsModule } from './modules/tickets/tickets.module';
       }),
     }),
     TicketsModule,
+    StatsModule,
+    UsersModule,
+    CommentsModule,
   ],
   controllers: [],
   providers: [],
