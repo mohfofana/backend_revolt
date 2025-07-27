@@ -11,9 +11,18 @@ export class StatsService {
   ) {}
 
   async getStats() {
-    const openTickets = await this.ticketRepository.count({ where: { status: 'open' } });
-    const closedTickets = await this.ticketRepository.count({ where: { status: 'closed' } });
-    const pendingTickets = await this.ticketRepository.count({ where: { status: 'in_progress' } });
+    // Compter les tickets par statut
+    const [openTickets, closedTickets, pendingTickets] = await Promise.all([
+      this.ticketRepository.count({ where: { status: 'open' } }),
+      this.ticketRepository.count({ 
+        where: [
+          { status: 'closed' },
+          { status: 'resolved' } // Inclure les tickets résolus dans les fermés
+        ]
+      }),
+      this.ticketRepository.count({ where: { status: 'in_progress' } })
+    ]);
+    
     return {
       openTickets,
       closedTickets,

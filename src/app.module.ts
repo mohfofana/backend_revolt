@@ -5,6 +5,7 @@ import { TicketsModule } from './modules/tickets/tickets.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { UsersModule } from './modules/users/users.module';
 import { CommentsModule } from './modules/comments/comments.module';
+import { AttachmentsModule } from './modules/attachments/attachments.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CommentsModule } from './modules/comments/comments.module';
     StatsModule,
     UsersModule,
     CommentsModule,
+    AttachmentsModule,
   ],
   controllers: [],
   providers: [],
