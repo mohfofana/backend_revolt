@@ -31,11 +31,23 @@ Ce dépôt contient uniquement le backend de l'application Revolte-TechOps. Le f
 - **Backend** (ce dépôt) : https://github.com/mohfofana/backend_revolt
 - **Frontend** : https://github.com/mohfofana/Revolte-TechOps
 
+## 🏗 Structure du Projet
+
+Ce dépôt contient le backend de l'application Revolte-TechOps. Pour une configuration complète, vous aurez également besoin du dépôt frontend.
+
+Structure recommandée des dossiers :
+```
+Revolte-TechOps/
+  ├── frontend/       # Dépôt frontend (https://github.com/mohfofana/Revolte-TechOps)
+  └── backend_revolt/ # Ce dépôt
+```
+
 ## 🚀 Installation
 
-### 1. Cloner le dépôt
+### 1. Configuration initiale
 
 ```bash
+# Aller dans le dossier parent du frontend et cloner le backend
 git clone https://github.com/mohfofana/backend_revolt.git
 cd backend_revolt
 ```
@@ -52,8 +64,10 @@ npm install
    ```bash
    cp .env.example .env
    ```
+   
+2. Éditer le fichier `.env` pour configurer votre base de données et autres paramètres.
 
-2. Éditer le fichier `.env` avec vos paramètres :
+3. Éditer le fichier `.env` avec vos paramètres :
    ```env
    # Configuration du serveur
    PORT=3001
@@ -65,24 +79,12 @@ npm install
    DB_USERNAME=postgres
    DB_PASSWORD=votre_mot_de_passe
    DB_DATABASE=revolte_techops
-   
-   # JWT
-   JWT_SECRET=votre_secret_jwt
-   JWT_EXPIRATION=1d
-   
-   # Uploads
-   UPLOAD_DIR=./uploads
-   MAX_FILE_SIZE=10485760 # 10MB
-   ```
+
 
 ### 4. Configuration de la Base de Données
 
 1. Créer une base de données PostgreSQL
 2. Mettre à jour les informations de connexion dans le fichier `.env`
-3. Exécuter les migrations :
-   ```bash
-   npm run typeorm migration:run
-   ```
 
 ## 🚀 Démarrage
 
@@ -91,16 +93,6 @@ npm install
 ```bash
 # Démarrage avec rechargement automatique
 npm run start:dev
-```
-
-### Production
-
-```bash
-# Compilation
-npm run build
-
-# Démarrage du serveur de production
-npm run start:prod
 ```
 
 ## 📚 Documentation API
@@ -144,20 +136,6 @@ backend/
 └── ...
 ```
 
-## 🧪 Tests
-
-Pour exécuter les tests :
-
-```bash
-# Tests unitaires
-npm run test
-
-# Tests e2e
-npm run test:e2e
-
-# Couverture de code
-npm run test:cov
-```
 
 ## 🛠 Technologies Utilisées
 
@@ -175,4 +153,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 📧 Contact
 
-Pour toute question ou suggestion, n'hésitez pas à me contacter à [votre@email.com](mailto:votre@email.com).
+Pour toute question ou suggestion, n'hésitez pas à me contacter à [mohamedaboubakar.fofana@gmail.com](mailto:mohamedaboubakar.fofana@gmail.com).
