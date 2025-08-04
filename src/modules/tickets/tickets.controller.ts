@@ -45,7 +45,7 @@ export class TicketsController {
   @ApiResponse({ status: 404, description: 'Ticket non trouvé' })
   @ApiResponse({ status: 401, description: 'Non autorisé' })
   findOne(@Param('id') id: string): Promise<Ticket> {
-    return this.ticketsService.findOne(+id);
+    return this.ticketsService.findOne(id);
   }
 
   @Post()

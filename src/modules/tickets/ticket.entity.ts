@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Comment } from '../comments/comment.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type TicketStatus = 'open' | 'pending' | 'closed';
@@ -66,4 +67,8 @@ export class Ticket {
   @ApiProperty({ description: 'Date de dernière mise à jour du ticket', type: Date })
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @ApiProperty({ description: 'Liste des commentaires associés au ticket', type: () => [Comment] })
+  @OneToMany(() => Comment, comment => comment.ticket, { eager: true })
+  comments!: Comment[]; // L'opérateur ! indique à TypeScript que la propriété sera initialisée par TypeORM
 }

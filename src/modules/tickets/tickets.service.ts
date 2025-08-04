@@ -45,29 +45,24 @@ export class TicketsService {
     return query.getMany();
   }
 
-  async findOneEnriched(id: number | string): Promise<any> {
+  async findOne(id: number | string): Promise<Ticket> {
     const ticketId = Number(id);
-    if (isNaN(ticketId)) throw new NotFoundException('Invalid ticket ID');
+    if (isNaN(ticketId)) throw new NotFoundException('ID de ticket invalide');
     
-    const ticket = await this.ticketRepository.findOneBy({ id: ticketId });
-    if (!ticket) throw new NotFoundException('Ticket not found');
-
-    // Comments
-    const comments = await this.ticketRepository.manager
-      .getRepository('Comment')
-      .find({ where: { ticket: { id: ticketId } }, order: { createdAt: 'ASC' } });
-
-    // Attachments
-    const attachments = await this.ticketRepository.manager
-      .getRepository('Attachment')
-      .find({ where: { ticket: { id: ticketId } }, order: { uploadedAt: 'ASC' } });
-
-    return { ...ticket, comments, attachments };
-  }
-
-  async findOne(id: number): Promise<Ticket> {
-    const ticket = await this.ticketRepository.findOneBy({ id });
-    if (!ticket) throw new NotFoundException('Ticket not found');
+    const ticket = await this.ticketRepository.findOne({
+      where: { id: ticketId },
+      relations: ['comments'],
+      order: {
+        comments: {
+          createdAt: 'ASC'
+        }
+      }
+    });
+    
+    if (!ticket) {
+      throw new NotFoundException(`Ticket avec l'ID ${id} non trouvé`);
+    }
+    
     return ticket;
   }
 
